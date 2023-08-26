@@ -8,28 +8,21 @@ int find_missing(int arr[],int n,int k){
     }
     int left = 0,right = n-1,mid = 0;
     int current_missing = 0;
+    int required_idx = n;
 
     while(left<=right){
         mid = (left + right)/2;
         current_missing = arr[mid] - mid - 1;
 
-        if(current_missing == k){
-            break;
-        }
-        else if(current_missing < k){
+        if(current_missing < k){
             left = mid + 1;
         }
         else{
+            required_idx = mid;
             right = mid - 1;
         }
     }
-    int answer = 0;
-    if(mid > 0){
-        answer = arr[mid-1] + (k - (arr[mid-1] - (mid-1 + 1)));
-    }
-    else{
-        answer = k;
-    }
+    int answer = k + required_idx;
     return answer;
 
 }
